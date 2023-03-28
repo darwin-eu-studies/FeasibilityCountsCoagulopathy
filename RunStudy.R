@@ -11,8 +11,8 @@ counts <- cdm[[tablePrefix]] %>%
   group_by(cohort_definition_id) %>%
   summarise(counts = as.numeric(n()), .groups = "drop") %>%
   left_join(cohortSet(cdm[[tablePrefix]]), by = "cohort_definition_id") %>%
-  mutate(cdm_name = cdmName(cdm)) %>%
   collect() %>%
+  mutate(cdm_name = cdmName(cdm)) %>%
   select("cohort_name", "cohort_definition_id", "counts", "cdm_name")
 
 write_csv(
