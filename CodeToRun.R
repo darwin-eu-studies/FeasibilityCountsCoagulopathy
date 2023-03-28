@@ -12,7 +12,7 @@ library(readr)
 
 # database metadata and connection details -----
 # The name/ acronym for the database
-databaseName<-"...."
+databaseName<-"gold"
 
 # Database connection details -----
 # In this study we also use the DBI package to connect to the database
@@ -23,20 +23,37 @@ databaseName<-"...."
 # db <- dbConnect(RPostgres::Postgres(), dbname = server_dbi, 
 #                 port = port, host = host, user = user,
 #                 password = password)
-db <- dbConnect("....")
+server_dbi <- "cdm_gold_202201" #Sys.getenv("DB_SERVER_DBI_aurum_202106")
+#server_dbi <- Sys.getenv("DB_SERVER_DBI_gold_202007")
+# server_dbi <- Sys.getenv("DB_SERVER_DBI_aurum_covid_202106")
+server <- "163.1.64.2/cdm_gold_202201"
+user <- Sys.getenv("DB_USER")
+password <- Sys.getenv("DB_PASSWORD")
+port <- Sys.getenv("DB_PORT")
+host <- Sys.getenv("DB_HOST")
+dbms <- "postgresql"
+
+db <- dbConnect(
+  RPostgres::Postgres(),
+  dbname = server_dbi,
+  port = port,
+  host = host,
+  user = user,
+  password = password
+)
 
 # The name of the schema that contains the OMOP CDM with patient-level data
-cdmDatabaseSchema<-"...."
+cdmDatabaseSchema<-"public"
 
 # The name of the schema where results tables will be created 
-results_database_schema<-"...."
+results_database_schema<-"results"
 
 # Name of table prefix to use in the result schema for tables created during 
 # the study
 # Note, if there is an existing table in your results schema with the same name
 # it will be overwritten 
 # Also note, this must be lower case
-tablePrefix <- "...."
+tablePrefix <- "fc_darwin"
 
 # create cdm reference ----
 cdm <- cdmFromCon(con = db,
@@ -52,4 +69,7 @@ cdm$person %>%
 source(here("RunStudy.R"))
 # after the study is run you should have a zip folder in your output folder to share
 
-cat(paste0("Thanks for running the study you can find the results (feasibility_counts_", databaseName, ".csv) in: ", here("Results")))
+cat(paste0(
+  "Thanks for running the study you can find the results (feasibility_counts_", 
+  databaseName, ".csv) in: ", here("Results")
+))
