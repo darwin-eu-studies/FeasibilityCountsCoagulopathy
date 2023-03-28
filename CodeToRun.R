@@ -9,7 +9,6 @@ library(here)
 library(DBI)
 library(dplyr)
 library(readr)
-library(log4r)
 
 # database metadata and connection details -----
 # The name/ acronym for the database
@@ -27,7 +26,7 @@ databaseName<-"...."
 db <- dbConnect("....")
 
 # The name of the schema that contains the OMOP CDM with patient-level data
-cdm_database_schema<-"...."
+cdmDatabaseSchema<-"...."
 
 # The name of the schema where results tables will be created 
 results_database_schema<-"...."
@@ -37,11 +36,11 @@ results_database_schema<-"...."
 # Note, if there is an existing table in your results schema with the same name
 # it will be overwritten 
 # Also note, this must be lower case
-table_prefix <- "...."
+tablePrefix <- "...."
 
 # create cdm reference ----
 cdm <- cdmFromCon(con = db,
-                  cdmSchema = cdm_database_schema,
+                  cdmSchema = cdmDatabaseSchema,
                   writeSchema = results_database_schema,
                   cdmName = databaseName)
 # check database connection
@@ -53,4 +52,4 @@ cdm$person %>%
 source(here("RunStudy.R"))
 # after the study is run you should have a zip folder in your output folder to share
 
-cat(paste0("Thanks for running the study you can find the results (feasibility_counts_", databaseName, ".csv) in: ", here("Results"))
+cat(paste0("Thanks for running the study you can find the results (feasibility_counts_", databaseName, ".csv) in: ", here("Results")))
