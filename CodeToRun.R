@@ -53,4 +53,4 @@ cdm$person %>%
 source(here("RunStudy.R"))
 # after the study is run you should have a zip folder in your output folder to share
 
-cat(paste0("Thanks for running the study you can find the results (feasibility_count_", databaseName, ".csv) in: ", here("Results"))
+cat(paste0("Thanks for running the study you can find the results (feasibility_counts_", databaseName, ".csv) in: ", here("Results"))
