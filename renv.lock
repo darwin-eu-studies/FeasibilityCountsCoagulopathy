@@ -116,6 +116,18 @@
       ],
       "Hash": "e749cae40fa9ef469b6050959517453c"
     },
+    "SqlRender": {
+      "Package": "SqlRender",
+      "Version": "1.13.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "checkmate",
+        "rJava",
+        "rlang"
+      ],
+      "Hash": "026b71f51728b52d4dd5f2d90222a09e"
+    },
     "backports": {
       "Package": "backports",
       "Version": "1.4.1",
